@@ -6,6 +6,8 @@ vim.g.maplocalleader = ' '
 vim.keymap.set('n', 't', '<Right>')
 vim.keymap.set('n', '<C-t>', '<Right>')
 
+vim.keymap.set('n', 'e', '<Down>')
+vim.keymap.set('n', 'u', '<Up>')
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
