@@ -3,11 +3,6 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.keymap.set('n', 't', '<Right>')
-vim.keymap.set('n', '<C-t>', '<Right>')
-
-vim.keymap.set('n', 'e', '<Down>')
-vim.keymap.set('n', 'u', '<Up>')
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -101,7 +96,7 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-t>', '<C-w><C-t>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-t>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
@@ -291,7 +286,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -649,7 +643,7 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
           ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -828,6 +822,61 @@ require('lazy').setup({
     },
   },
 })
+local harpoon = require 'harpoon'
 
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set('n', '<leader>a', function()
+  harpoon:list():add()
+end, { desc = '[A]dd to the list' })
+vim.keymap.set('n', '<C-e>', function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+vim.keymap.set('n', '<C-h>', function()
+  harpoon:list():select(1)
+end)
+vim.keymap.set('n', '<C-t>', function()
+  harpoon:list():select(2)
+end)
+vim.keymap.set('n', '<C-n>', function()
+  harpoon:list():select(3)
+end)
+vim.keymap.set('n', '<C-s>', function()
+  harpoon:list():select(4)
+end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set('n', '<C-S-P>', function()
+  harpoon:list():prev()
+end)
+vim.keymap.set('n', '<C-S-N>', function()
+  harpoon:list():next()
+end)
+-- basic telescope configuration
+local conf = require('telescope.config').values
+local function toggle_telescope(harpoon_files)
+  local file_paths = {}
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
+
+  require('telescope.pickers')
+    .new({}, {
+      prompt_title = 'Harpoon',
+      finder = require('telescope.finders').new_table {
+        results = file_paths,
+      },
+      previewer = conf.file_previewer {},
+      sorter = conf.generic_sorter {},
+    })
+    :find()
+end
+
+vim.keymap.set('n', '<C-e>', function()
+  toggle_telescope(harpoon:list())
+end, { desc = 'Open harpoon window' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

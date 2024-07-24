@@ -18,7 +18,8 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
-          ['e'] = '<Down>',
+        },
+        fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
         },
       },
     },

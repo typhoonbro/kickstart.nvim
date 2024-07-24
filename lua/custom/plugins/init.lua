@@ -3,9 +3,9 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  -- {
-  --   'pmizio/typescript-tools.nvim',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  --   opts = {},
-  -- },
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
 }
