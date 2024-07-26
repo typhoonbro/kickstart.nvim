@@ -16,7 +16,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -790,7 +790,6 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
@@ -803,6 +802,7 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
+  { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons', diagnostics = 'nvim_lsp' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -824,19 +824,28 @@ require('lazy').setup({
     },
   },
 })
-require('kanagawa').setup {
-  transparent = true,
-  background = {
-    dark = 'wave',
-  },
-}
 require('neo-tree').setup {
   source_selector = {
     winbar = true,
     statusline = true,
   },
 }
+-- Bufferline --
+vim.opt.termguicolors = true
+require('bufferline').setup {}
+vim.keymap.set('n', '<leader>1', '<cmd>BufferLineGoToBuffer 1<CR>', { desc = 'Go to buffer number [1]' })
+vim.keymap.set('n', '<leader>2', '<cmd>BufferLineGoToBuffer 2<CR>', { desc = 'Go to buffer number [2]' })
+vim.keymap.set('n', '<leader>3', '<cmd>BufferLineGoToBuffer 3<CR>', { desc = 'Go to buffer number [3]' })
+vim.keymap.set('n', '<leader>4', '<cmd>BufferLineGoToBuffer 4<CR>', { desc = 'Go to buffer number [4]' })
+vim.keymap.set('n', '<leader>5', '<cmd>BufferLineGoToBuffer 5<CR>', { desc = 'Go to buffer number [5]' })
+vim.keymap.set('n', '<leader>6', '<cmd>BufferLineGoToBuffer 6<CR>', { desc = 'Go to buffer number [6]' })
+vim.keymap.set('n', '<leader>7', '<cmd>BufferLineGoToBuffer 7<CR>', { desc = 'Go to buffer number [7]' })
+vim.keymap.set('n', '<leader>8', '<cmd>BufferLineGoToBuffer 8<CR>', { desc = 'Go to buffer number [8]' })
+vim.keymap.set('n', '<leader>9', '<cmd>BufferLineGoToBuffer 9<CR>', { desc = 'Go to buffer number [9]' })
+vim.keymap.set('n', '<leader><C-i>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<leader>+', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Go to previous buffer' })
 
+-- END of Bufferline --
 local harpoon = require 'harpoon'
 
 -- REQUIRED
@@ -884,7 +893,11 @@ vim.keymap.set('n', '<C-e>', function()
   toggle_telescope(harpoon:list())
 end, { desc = 'Open harpoon window' })
 
-vim.cmd 'KanagawaCompile'
 vim.keymap.set('n', '<cr>', 'o<Esc>')
+
+-- Extra compile step for some plugins
+
+vim.cmd 'KanagawaCompile'
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
