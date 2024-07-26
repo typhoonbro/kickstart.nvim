@@ -8,4 +8,5 @@ return {
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  { 'wakatime/vim-wakatime', lazy = false },
 }
