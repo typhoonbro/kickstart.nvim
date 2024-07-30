@@ -16,8 +16,19 @@ return {
   opts = {
     filesystem = {
       window = {
+        position = 'float',
+        selector = true,
+        source_selector = {
+          winbar = true,
+          statusline = true,
+        },
+        mapping_options = {
+          noremap = false,
+        },
         mappings = {
           ['\\'] = 'close_window',
+          ['e'] = '<nop>',
+          ['<space>'] = { 'toggle_node', nowait = false },
         },
       },
     },

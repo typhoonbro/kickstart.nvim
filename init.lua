@@ -96,10 +96,10 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -702,9 +702,6 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'kanagawa'
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
     end,
   },
 
@@ -795,13 +792,13 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
+  { import = 'custom.mapping' },
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons', diagnostics = 'nvim_lsp' },
 }, {
   ui = {
@@ -824,11 +821,21 @@ require('lazy').setup({
     },
   },
 })
-require('neo-tree').setup {
-  source_selector = {
-    winbar = true,
-    statusline = true,
-  },
+
+-- BIG SESSION OF CUSTOMIZING SETUPS --
+
+-- NeoTree --
+-- require('neo-tree').setup {
+--   source_selector = {
+--     winbar = true,
+--     statusline = true,
+--   },
+-- }
+-- END NeoTree --
+
+require('kanagawa').setup {
+  transparent = true,
+  compile = true,
 }
 -- Bufferline --
 vim.opt.termguicolors = true
@@ -846,29 +853,13 @@ vim.keymap.set('n', '<leader><C-i>', '<cmd>BufferLineCycleNext<CR>', { desc = 'G
 vim.keymap.set('n', '<leader>+', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Go to previous buffer' })
 
 -- END of Bufferline --
+-- START of Harpoon --
 local harpoon = require 'harpoon'
 
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
 
-vim.keymap.set('n', '<leader>a', function()
-  harpoon:list():add()
-end, { desc = '[A]dd to the list' })
-vim.keymap.set('n', '<leader><C-a>r', function()
-  harpoon:list():remove()
-end, { desc = '[R]emove from the list' })
-vim.keymap.set('n', '<leader><C-a>c', function()
-  harpoon:list():clear()
-end, { desc = '[C]lear the list' })
-vim.keymap.set('n', '<C-e>', function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set('n', '<C-S-P>', function()
-  harpoon:list():prev()
-end)
 -- basic telescope configuration
 local conf = require('telescope.config').values
 local function toggle_telescope(harpoon_files)
@@ -893,11 +884,38 @@ vim.keymap.set('n', '<C-e>', function()
   toggle_telescope(harpoon:list())
 end, { desc = 'Open harpoon window' })
 
+vim.keymap.set('n', '<leader>a', function()
+  harpoon:list():add()
+end, { desc = '[A]dd to the list' })
+vim.keymap.set('n', '<leader><C-a>r', function()
+  harpoon:list():remove()
+end, { desc = '[R]emove from the list' })
+vim.keymap.set('n', '<leader><C-a>c', function()
+  harpoon:list():clear()
+end, { desc = '[C]lear the list' })
+vim.keymap.set('n', '<C-e>', function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+vim.keymap.set('n', '<C-h>', function()
+  harpoon:list():select(1)
+end)
+vim.keymap.set('n', '<C-t>', function()
+  harpoon:list():select(2)
+end)
+vim.keymap.set('n', '<C-n>', function()
+  harpoon:list():select(3)
+end)
+vim.keymap.set('n', '<C-s>', function()
+  harpoon:list():select(4)
+end)
+-- END of Harpoon --
+
 vim.keymap.set('n', '<cr>', 'o<Esc>')
 
 -- Extra compile step for some plugins
 
-vim.cmd 'KanagawaCompile'
+vim.cmd.colorscheme 'kanagawa-dragon'
+-- vim.cmd 'KanagawaCompile'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

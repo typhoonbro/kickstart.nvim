@@ -1,0 +1,29 @@
+return {
+  vim.api.nvim_set_keymap('v', 'e', 'j', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'e', 'j', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', '<C-e>', '<C-j>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', '<C-e>', '<C-j>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'E', 'J', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'E', 'J', { noremap = true, silent = true }),
+
+  vim.api.nvim_set_keymap('n', 'u', 'k', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'u', 'k', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', '<C-u>', '<C-k>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', '<C-u>', '<C-k>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'U', 'K', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'U', 'K', { noremap = true, silent = true }),
+
+  vim.api.nvim_set_keymap('n', 'k', 'u', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'k', 'u', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', '<C-k>', '<C-u>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', '<C-k>', '<C-u>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'K', 'U', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'K', 'U', { noremap = true, silent = true }),
+
+  vim.api.nvim_set_keymap('v', 'j', 'e', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'j', 'e', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', '<C-j>', '<C-e>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', '<C-j>', '<C-e>', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('v', 'J', 'E', { noremap = true, silent = true }),
+  vim.api.nvim_set_keymap('n', 'J', 'E', { noremap = true, silent = true }),
+}
