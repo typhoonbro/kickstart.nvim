@@ -909,7 +909,6 @@ vim.keymap.set('n', '<C-s>', function()
   harpoon:list():select(4)
 end)
 -- END of Harpoon --
-
 vim.keymap.set('n', '<cr>', 'o<Esc>')
 
 -- Extra compile step for some plugins

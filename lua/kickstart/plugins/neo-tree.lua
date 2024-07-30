@@ -27,7 +27,7 @@ return {
         },
         mappings = {
           ['\\'] = 'close_window',
-          ['e'] = '<nop>',
+          ['e'] = 'move_cursor_down',
           ['<space>'] = { 'toggle_node', nowait = false },
         },
       },
