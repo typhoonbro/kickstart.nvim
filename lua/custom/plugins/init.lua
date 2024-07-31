@@ -9,4 +9,6 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
   { 'wakatime/vim-wakatime', lazy = false },
+  { 'ThePrimeagen/vim-be-good' },
+  { 'ThePrimeagen/vim-apm' },
 }

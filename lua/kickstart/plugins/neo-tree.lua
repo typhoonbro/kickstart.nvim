@@ -14,6 +14,12 @@ return {
     { '\\', ':Neotree toggle<CR>', desc = 'NeoTree reveal' },
   },
   opts = {
+    window = {
+      mappings = {
+
+        ['e'] = 'navigate_down',
+      },
+    },
     filesystem = {
       window = {
         position = 'float',
@@ -27,9 +33,14 @@ return {
         },
         mappings = {
           ['\\'] = 'close_window',
-          ['e'] = 'move_cursor_down',
           ['<space>'] = { 'toggle_node', nowait = false },
         },
+      },
+    },
+    buffers = {
+      mappings = {
+        ['\\'] = 'close_window',
+        ['<space>'] = { 'toggle_node', nowait = false },
       },
     },
   },

@@ -689,22 +689,13 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-
+  -- Themes
+  {
     'rebelot/kanagawa.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    end,
+    --
   },
-
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -729,21 +720,25 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
+      -- local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- ---@diagnostic disable-next-line: duplicate-set-field
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -837,6 +832,13 @@ require('kanagawa').setup {
   transparent = true,
   compile = true,
 }
+require('catppuccin').setup {
+  transparent_background = true,
+}
+-- require('cyberdream').setup {
+--   transparent = true,
+--   terminal_colors = true,
+-- }
 -- Bufferline --
 vim.opt.termguicolors = true
 require('bufferline').setup {}
@@ -909,12 +911,22 @@ vim.keymap.set('n', '<C-s>', function()
   harpoon:list():select(4)
 end)
 -- END of Harpoon --
+-- Start of VimApm --
+local apm = require 'vim-apm'
+
+apm:setup {}
+vim.keymap.set('n', '<leader><C-a>pm', function()
+  apm:toggle_monitor()
+end)
+-- End of VimApm --
 vim.keymap.set('n', '<cr>', 'o<Esc>')
 
 -- Extra compile step for some plugins
 
-vim.cmd.colorscheme 'kanagawa-dragon'
+-- vim.cmd.colorscheme 'cyberdream'
+-- vim.cmd.colorscheme 'kanagawa-dragon'
 -- vim.cmd 'KanagawaCompile'
-
+vim.cmd.colorscheme 'catppuccin'
+require('lualine').setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
