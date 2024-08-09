@@ -11,4 +11,5 @@ return {
   { 'wakatime/vim-wakatime', lazy = false },
   { 'ThePrimeagen/vim-be-good' },
   { 'ThePrimeagen/vim-apm' },
+  { 'shortcuts/no-neck-pain.nvim', version = '*' },
 }

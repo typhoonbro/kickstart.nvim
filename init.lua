@@ -833,7 +833,10 @@ require('kanagawa').setup {
   compile = true,
 }
 require('catppuccin').setup {
-  transparent_background = true,
+  background = {
+    dark = 'macchiato',
+    light = 'latte',
+  },
 }
 -- require('cyberdream').setup {
 --   transparent = true,
@@ -922,6 +925,15 @@ end)
 vim.keymap.set('n', '<cr>', 'o<Esc>')
 
 -- Extra compile step for some plugins
+require('no-neck-pain').setup {
+  width = 135,
+  mappings = {
+    enabled = true,
+    toggleLeftSide = 'false',
+    toggleRightSide = 'false',
+    widthUp = '<Leader>n+',
+  },
+}
 
 -- vim.cmd.colorscheme 'cyberdream'
 -- vim.cmd.colorscheme 'kanagawa-dragon'
